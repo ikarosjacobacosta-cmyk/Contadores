@@ -1,205 +1,873 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Control de Sucursales</title>
-<link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe de Contadores</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        h2 {
+            color: #444;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .total-row {
+            background-color: #e6f7ff;
+            font-weight: bold;
+        }
+        .monto-row {
+            background-color: #fff2cc;
+        }
+        img {
+            width: 5cm;
+            height: 5cm;
+            object-fit: contain;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>Control de Sucursales - Los Laureles</h1>
-    </header>
-
-    <div class="busqueda-container">
-      <input type="text" id="busqueda" placeholder="Buscar número de máquina, contadores o premios..." aria-label="Buscar">
+    <h1>Informe de Contadores</h1>
+    
+    <!-- Sección Los Laureles -->
+    <div class="section">
+        <h2>Los Laureles</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nro</th>
+                    <th>Inicio</th>
+                    <th>Fin</th>
+                    <th>Diferencia</th>
+                    <th>Fichas retiradas</th>
+                    <th>Inicio</th>
+                    <th>Fin</th>
+                    <th>Diferencia</th>
+                    <th>Salida de Stock</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><img src="imagenes/14.jpg" alt="14"></td>
+                    <td>15523</td>
+                    <td>15541</td>
+                    <td>18</td>
+                    <td>18</td>
+                    <td>1861</td>
+                    <td>1864</td>
+                    <td>3</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/05.jpg" alt="05"></td>
+                    <td>14943</td>
+                    <td>15004</td>
+                    <td>61</td>
+                    <td>63</td>
+                    <td>488</td>
+                    <td>491</td>
+                    <td>3</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/13.jpg" alt="13"></td>
+                    <td>17758</td>
+                    <td>17860</td>
+                    <td>102</td>
+                    <td>101</td>
+                    <td>1596</td>
+                    <td>1604</td>
+                    <td>8</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/03.jpg" alt="03"></td>
+                    <td>30372</td>
+                    <td>30429</td>
+                    <td>57</td>
+                    <td>30</td>
+                    <td>651</td>
+                    <td>655</td>
+                    <td>4</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/02.jpg" alt="02"></td>
+                    <td>4563</td>
+                    <td>4626</td>
+                    <td>63</td>
+                    <td>63</td>
+                    <td>269</td>
+                    <td>274</td>
+                    <td>5</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/06.jpg" alt="06"></td>
+                    <td>931</td>
+                    <td>959</td>
+                    <td>28</td>
+                    <td>30</td>
+                    <td>69</td>
+                    <td>71</td>
+                    <td>2</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/08.jpg" alt="08"></td>
+                    <td>46192</td>
+                    <td>46237</td>
+                    <td>45</td>
+                    <td>45</td>
+                    <td>24736</td>
+                    <td>25009</td>
+                    <td>273</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/09.jpg" alt="09"></td>
+                    <td>151568</td>
+                    <td>151626</td>
+                    <td>58</td>
+                    <td>55</td>
+                    <td>4727</td>
+                    <td>5262</td>
+                    <td>535</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/10.jpg" alt="10"></td>
+                    <td>80984</td>
+                    <td>81004</td>
+                    <td>20</td>
+                    <td>19</td>
+                    <td>306381</td>
+                    <td>306470</td>
+                    <td>89</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/11.jpg" alt="11"></td>
+                    <td>117387</td>
+                    <td>117414</td>
+                    <td>27</td>
+                    <td>27</td>
+                    <td>44544</td>
+                    <td>44682</td>
+                    <td>138</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/12.jpg" alt="12"></td>
+                    <td>31897</td>
+                    <td>31961</td>
+                    <td>64</td>
+                    <td>109</td>
+                    <td>42769</td>
+                    <td>43905</td>
+                    <td>1136</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/04.jpg" alt="04"></td>
+                    <td></td>
+                    <td></td>
+                    <td>0</td>
+                    <td>4</td>
+                    <td></td>
+                    <td></td>
+                    <td>0</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/07.jpg" alt="07"></td>
+                    <td></td>
+                    <td></td>
+                    <td>0</td>
+                    <td>12</td>
+                    <td></td>
+                    <td></td>
+                    <td>0</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/01.jpg" alt="01"></td>
+                    <td>42569</td>
+                    <td>42604</td>
+                    <td>35</td>
+                    <td>35</td>
+                    <td>8025</td>
+                    <td>8027</td>
+                    <td>2</td>
+                    <td>-</td>
+                </tr>
+                <tr class="total-row">
+                    <td>Totales</td>
+                    <td></td>
+                    <td></td>
+                    <td>594</td>
+                    <td>611</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>-</td>
+                </tr>
+                <tr class="monto-row">
+                    <td>Monto (Gs)</td>
+                    <td></td>
+                    <td></td>
+                    <td>4.950.000</td>
+                    <td>5.091.667</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-
-    <section class="categoria" data-categoria="Los Laureles">
-      <h2>Los Laureles</h2>
-      <div class="galeria">
-        <div class="imagen-item" data-code="14" data-price="11">
-          <img src="imagenes/01.jpg" alt="Máquina 14">
-          <p>Máquina: 14</p>
-          <p>15512 - 15523</p>
-          <p>Dif: 11</p>
-          <p>Fichas: 11</p>
-          <p>Premios: 1860 - 1861</p>
-          <p>Dif: 1</p>
-          <p>invent: -</p>
-        </div>
-        <div class="imagen-item" data-code="05" data-price="33">
-          <img src="imagenes/02.jpg" alt="Máquina 05">
-          <p>Máquina: 05</p>
-          <p>Contadores: 14910 - 14943</p>
-          <p>Diferencia: 33</p>
-          <p>Fichas retiradas: 33</p>
-          <p>Premios: 485 - 488</p>
-          <p>Diferencia: 3</p>
-          <p>Premios por inventario: -</p>
-        </div>
-        <div class="imagen-item" data-code="13" data-price="104">
-          <img src="imagenes/03.jpg" alt="Máquina 13">
-          <p>Máquina: 13</p>
-          <p>Contadores: 17654 - 17758</p>
-          <p>Diferencia: 104</p>
-          <p>Fichas retiradas: 104</p>
-          <p>Premios: 1588 - 1596</p>
-          <p>Diferencia: 8</p>
-          <p>Premios por inventario: -</p>
-        </div>
-        <div class="imagen-item" data-code="03" data-price="35">
-          <img src="imagenes/04.jpg" alt="Máquina 03">
-          <p>Máquina: 03</p>
-          <p>Contadores: 30337 - 30372</p>
-          <p>Diferencia: 35</p>
-          <p>Fichas retiradas: 35</p>
-          <p>Premios: 650 - 651</p>
-          <p>Diferencia: 1</p>
-          <p>Premios por inventario: -</p>
-        </div>
-        <div class="imagen-item" data-code="02" data-price="44">
-          <img src="imagenes/05.jpg" alt="Máquina 02">
-          <p>Máquina: 02</p>
-          <p>Contadores: 4519 - 4563</p>
-          <p>Diferencia: 44</p>
-          <p>Fichas retiradas: 44</p>
-          <p>Premios: 266 - 269</p>
-          <p>Diferencia: 3</p>
-          <p>Premios por inventario: -</p>
-        </div>
-        <div class="imagen-item" data-code="06" data-price="27">
-          <img src="imagenes/06.jpg" alt="Máquina 06">
-          <p>Máquina: 06</p>
-          <p>Contadores: 904 - 931</p>
-          <p>Diferencia: 27</p>
-          <p>Fichas retiradas: 25</p>
-          <p>Premios: 66 - 69</p>
-          <p>Diferencia: 3</p>
-          <p>Premios por inventario: -</p>
-        </div>
-        <div class="imagen-item" data-code="08" data-price="35">
-          <img src="imagenes/07.jpg" alt="Máquina 08">
-          <p>Máquina: 08</p>
-          <p>Contadores: 46157 - 46192</p>
-          <p>Diferencia: 35</p>
-          <p>Fichas retiradas: 36</p>
-          <p>Premios: 24576 - 24736</p>
-          <p>Diferencia: 160</p>
-          <p>Premios por inventario: -</p>
-        </div>
-        <div class="imagen-item" data-code="09" data-price="57">
-          <img src="imagenes/08.jpg" alt="Máquina 09">
-          <p>Máquina: 09</p>
-          <p>Contadores: 151511 - 151568</p>
-          <p>Diferencia: 57</p>
-          <p>Fichas retiradas: 57</p>
-          <p>Premios: 4211 - 4727</p>
-          <p>Diferencia: 516</p>
-          <p>Premios por inventario: -</p>
-        </div>
-        <div class="imagen-item" data-code="10" data-price="39">
-          <img src="imagenes/09.jpg" alt="Máquina 10">
-          <p>Máquina: 10</p>
-          <p>Contadores: 80945 - 80984</p>
-          <p>Diferencia: 39</p>
-          <p>Fichas retiradas: 1</p>
-          <p>Premios: 306195 - 306381</p>
-          <p>Diferencia: 186</p>
-          <p>Premios por inventario: -</p>
-        </div>
-        <div class="imagen-item" data-code="11" data-price="24">
-          <img src="imagenes/10.jpg" alt="Máquina 11">
-          <p>Máquina: 11</p>
-          <p>Contadores: 117363 - 117387</p>
-          <p>Diferencia: 24</p>
-          <p>Fichas retiradas: 26</p>
-          <p>Premios: 44403 - 44544</p>
-          <p>Diferencia: 141</p>
-          <p>Premios por inventario: -</p>
-        </div>
-        <div class="imagen-item" data-code="12" data-price="39">
-          <img src="imagenes/11.jpg" alt="Máquina 12">
-          <p>Máquina: 12</p>
-          <p>Contadores: 31858 - 31897</p>
-          <p>Diferencia: 39</p>
-          <p>Fichas retiradas: 40</p>
-          <p>Premios: 41621 - 42769</p>
-          <p>Diferencia: 1148</p>
-          <p>Premios por inventario: -</p>
-        </div>
-        <div class="imagen-item" data-code="04" data-price="0">
-          <img src="imagenes/12.jpg" alt="Máquina 04">
-          <p>Máquina: 04</p>
-          <p>Contadores: -</p>
-          <p>Diferencia: 0</p>
-          <p>Fichas retiradas: 14</p>
-          <p>Premios: -</p>
-          <p>Diferencia: 0</p>
-          <p>Premios por inventario: -</p>
-        </div>
-        <div class="imagen-item" data-code="07" data-price="0">
-          <img src="imagenes/13.jpg" alt="Máquina 07">
-          <p>Máquina: 07</p>
-          <p>Contadores: -</p>
-          <p>Diferencia: 0</p>
-          <p>Fichas retiradas: 14</p>
-          <p>Premios: -</p>
-          <p>Diferencia: 0</p>
-          <p>Premios por inventario: -</p>
-        </div>
-        <div class="imagen-item" data-code="01" data-price="0">
-          <img src="imagenes/14.jpg" alt="Máquina 01">
-          <p>Máquina: 01</p>
-          <p>Contadores: - 42569</p>
-          <p>Diferencia: -</p>
-          <p>Fichas retiradas: 138</p>
-          <p>Premios: 8025 -</p>
-          <p>Diferencia: -</p>
-          <p>Premios por inventario: -</p>
-        </div>
-      </div>
-    </section>
-
-  </div> <!-- container -->
-  <footer>
-    <p>© 2025 Control de Sucursales</p>
-  </footer>
-
-<script>
-// Buscador que filtra por código (primeros 3 dígitos), precio o categoría
-document.getElementById('busqueda').addEventListener('input', function() {
-  const q = this.value.trim().toLowerCase();
-  const categorias = document.querySelectorAll('.categoria');
-
-  categorias.forEach(cat => {
-    const title = (cat.getAttribute('data-categoria') || '').toLowerCase();
-    let anyVisible = false;
-
-    const items = cat.querySelectorAll('.imagen-item');
-    items.forEach(item => {
-      const code = (item.getAttribute('data-code') || '').toLowerCase();
-      const price = (item.getAttribute('data-price') || '').toLowerCase();
-
-      // Solo los primeros 3 dígitos del código
-      const codePrefix = code.substring(0, 3);
-
-      // Combinar para buscar: prefijo del código + precio + categoría
-      const combined = codePrefix + ' ' + price + ' ' + title;
-
-      if (q === '' || combined.includes(q)) {
-        item.style.display = 'flex';
-        anyVisible = true;
-      } else {
-        item.style.display = 'none';
-      }
-    });
-
-    cat.style.display = anyVisible ? 'block' : 'none';
-  });
-});
-</script>
-
+    
+    <!-- Sección Villa Morra -->
+    <div class="section">
+        <h2>Villa Morra</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nro</th>
+                    <th>Inicio</th>
+                    <th>Fin</th>
+                    <th>Diferencia</th>
+                    <th>Fichas retiradas</th>
+                    <th>Inicio</th>
+                    <th>Fin</th>
+                    <th>Diferencia</th>
+                    <th>Salida de Stock</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><img src="imagenes/38.jpg" alt="38"></td>
+                    <td>28209</td>
+                    <td>28283</td>
+                    <td>74</td>
+                    <td>72</td>
+                    <td></td>
+                    <td></td>
+                    <td>0</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/39.jpg" alt="39"></td>
+                    <td>836</td>
+                    <td>913</td>
+                    <td>77</td>
+                    <td>68</td>
+                    <td>83</td>
+                    <td>90</td>
+                    <td>7</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/40.jpg" alt="40"></td>
+                    <td>28600</td>
+                    <td>28661</td>
+                    <td>61</td>
+                    <td>61</td>
+                    <td>2087</td>
+                    <td>2092</td>
+                    <td>5</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/41.jpg" alt="41"></td>
+                    <td>27464</td>
+                    <td>27481</td>
+                    <td>17</td>
+                    <td>17</td>
+                    <td>2171</td>
+                    <td>2176</td>
+                    <td>5</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/42.jpg" alt="42"></td>
+                    <td>571</td>
+                    <td>624</td>
+                    <td>53</td>
+                    <td>51</td>
+                    <td>40</td>
+                    <td>44</td>
+                    <td>4</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/43.jpg" alt="43"></td>
+                    <td>19079</td>
+                    <td>19147</td>
+                    <td>68</td>
+                    <td></td>
+                    <td>1674</td>
+                    <td>1678</td>
+                    <td>4</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/44.jpg" alt="44"></td>
+                    <td>20616</td>
+                    <td>20652</td>
+                    <td>36</td>
+                    <td>102</td>
+                    <td>1428</td>
+                    <td>1431</td>
+                    <td>3</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/36.jpg" alt="36"></td>
+                    <td></td>
+                    <td></td>
+                    <td>0</td>
+                    <td>29</td>
+                    <td>13360</td>
+                    <td>13471</td>
+                    <td>111</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/37.jpg" alt="37"></td>
+                    <td>104336</td>
+                    <td>104372</td>
+                    <td>36</td>
+                    <td>36</td>
+                    <td>663794</td>
+                    <td>663953</td>
+                    <td>159</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/35.jpg" alt="35"></td>
+                    <td>40148</td>
+                    <td>40212</td>
+                    <td>64</td>
+                    <td>64</td>
+                    <td>23402</td>
+                    <td>23769</td>
+                    <td>367</td>
+                    <td>-</td>
+                </tr>
+                <tr class="total-row">
+                    <td>Totales</td>
+                    <td></td>
+                    <td></td>
+                    <td>486</td>
+                    <td>500</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr class="monto-row">
+                    <td>Monto (Gs)</td>
+                    <td></td>
+                    <td></td>
+                    <td>4.050.000</td>
+                    <td>4.166.667</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- Sección Lambaré -->
+    <div class="section">
+        <h2>Lambaré</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nro</th>
+                    <th>Inicio</th>
+                    <th>Fin</th>
+                    <th>Diferencia</th>
+                    <th>Fichas retiradas</th>
+                    <th>Inicio</th>
+                    <th>Fin</th>
+                    <th>Diferencia</th>
+                    <th>Salida de Stock</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><img src="imagenes/49.jpg" alt="49"></td>
+                    <td>221</td>
+                    <td>250</td>
+                    <td>29</td>
+                    <td>32</td>
+                    <td>41</td>
+                    <td>47</td>
+                    <td>6</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/50.jpg" alt="50"></td>
+                    <td>35</td>
+                    <td>45</td>
+                    <td>10</td>
+                    <td>10</td>
+                    <td>8</td>
+                    <td>10</td>
+                    <td>2</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/53.jpg" alt="53"></td>
+                    <td>171</td>
+                    <td>176</td>
+                    <td>5</td>
+                    <td></td>
+                    <td>28</td>
+                    <td>28</td>
+                    <td>0</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/51.jpg" alt="51"></td>
+                    <td>1576</td>
+                    <td>1605</td>
+                    <td>29</td>
+                    <td>28</td>
+                    <td>112</td>
+                    <td>114</td>
+                    <td>2</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/45.jpg" alt="45"></td>
+                    <td>6932</td>
+                    <td>6963</td>
+                    <td>31</td>
+                    <td>31</td>
+                    <td>607</td>
+                    <td>610</td>
+                    <td>3</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/46.jpg" alt="46"></td>
+                    <td>247</td>
+                    <td>269</td>
+                    <td>22</td>
+                    <td>22</td>
+                    <td>24</td>
+                    <td>26</td>
+                    <td>2</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/58.jpg" alt="58"></td>
+                    <td>10322</td>
+                    <td>10377</td>
+                    <td>55</td>
+                    <td>49</td>
+                    <td>36852</td>
+                    <td>36872</td>
+                    <td>20</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/52.jpg" alt="52"></td>
+                    <td></td>
+                    <td></td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td>0</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/54.jpg" alt="54"></td>
+                    <td></td>
+                    <td></td>
+                    <td>0</td>
+                    <td>7</td>
+                    <td></td>
+                    <td></td>
+                    <td>0</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/55.jpg" alt="55"></td>
+                    <td></td>
+                    <td></td>
+                    <td>0</td>
+                    <td>7</td>
+                    <td></td>
+                    <td></td>
+                    <td>0</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/56.jpg" alt="56"></td>
+                    <td></td>
+                    <td></td>
+                    <td>0</td>
+                    <td>9</td>
+                    <td></td>
+                    <td></td>
+                    <td>0</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/48.jpg" alt="48"></td>
+                    <td></td>
+                    <td></td>
+                    <td>0</td>
+                    <td>10</td>
+                    <td></td>
+                    <td></td>
+                    <td>0</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/57.jpg" alt="57"></td>
+                    <td></td>
+                    <td></td>
+                    <td>0</td>
+                    <td>12</td>
+                    <td></td>
+                    <td></td>
+                    <td>0</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/47.jpg" alt="47"></td>
+                    <td>16470</td>
+                    <td>16487</td>
+                    <td>17</td>
+                    <td>17</td>
+                    <td>302899</td>
+                    <td>303021</td>
+                    <td>122</td>
+                    <td>-</td>
+                </tr>
+                <tr class="total-row">
+                    <td>Totales</td>
+                    <td></td>
+                    <td></td>
+                    <td>243</td>
+                    <td>234</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr class="monto-row">
+                    <td>Monto (Gs)</td>
+                    <td></td>
+                    <td></td>
+                    <td>2.025.000</td>
+                    <td>1.950.000</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- Sección Villa Elisa -->
+    <div class="section">
+        <h2>Villa Elisa</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nro</th>
+                    <th>Inicio</th>
+                    <th>Fin</th>
+                    <th>Diferencia</th>
+                    <th>Fichas retiradas</th>
+                    <th>Inicio</th>
+                    <th>Fin</th>
+                    <th>Diferencia</th>
+                    <th>Salida de Stock</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><img src="imagenes/22.jpg" alt="22"></td>
+                    <td>99285</td>
+                    <td>99317</td>
+                    <td>32</td>
+                    <td></td>
+                    <td>620085</td>
+                    <td>620365</td>
+                    <td>280</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/23.jpg" alt="23"></td>
+                    <td>31000</td>
+                    <td>31020</td>
+                    <td>20</td>
+                    <td>20</td>
+                    <td>1897</td>
+                    <td>2070</td>
+                    <td>173</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/24.jpg" alt="24"></td>
+                    <td>63430</td>
+                    <td>63462</td>
+                    <td>32</td>
+                    <td>31</td>
+                    <td>240191</td>
+                    <td>240297</td>
+                    <td>106</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/33.jpg" alt="33"></td>
+                    <td>16695</td>
+                    <td>16715</td>
+                    <td>20</td>
+                    <td>13</td>
+                    <td>2901</td>
+                    <td>3075</td>
+                    <td>174</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/25.jpg" alt="25"></td>
+                    <td>95366</td>
+                    <td>95395</td>
+                    <td>29</td>
+                    <td>27</td>
+                    <td>961739</td>
+                    <td>961939</td>
+                    <td>200</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/32.jpg" alt="32"></td>
+                    <td></td>
+                    <td></td>
+                    <td>0</td>
+                    <td>11</td>
+                    <td></td>
+                    <td></td>
+                    <td>0</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/26.jpg" alt="26"></td>
+                    <td>13612</td>
+                    <td>13612</td>
+                    <td>0</td>
+                    <td>19</td>
+                    <td></td>
+                    <td></td>
+                    <td>0</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/27.jpg" alt="27"></td>
+                    <td>70427</td>
+                    <td>70446</td>
+                    <td>19</td>
+                    <td>19</td>
+                    <td></td>
+                    <td></td>
+                    <td>0</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/34.jpg" alt="34"></td>
+                    <td>5978</td>
+                    <td>5985</td>
+                    <td>7</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>0</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/15.jpg" alt="15"></td>
+                    <td>5856</td>
+                    <td>5871</td>
+                    <td>15</td>
+                    <td>5</td>
+                    <td>719</td>
+                    <td>721</td>
+                    <td>2</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/16.jpg" alt="16"></td>
+                    <td>10173</td>
+                    <td>10174</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>1353</td>
+                    <td>1353</td>
+                    <td>0</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/19.jpg" alt="19"></td>
+                    <td>391</td>
+                    <td>408</td>
+                    <td>17</td>
+                    <td>6</td>
+                    <td>38</td>
+                    <td>40</td>
+                    <td>2</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/21.jpg" alt="21"></td>
+                    <td>247</td>
+                    <td>282</td>
+                    <td>35</td>
+                    <td>35</td>
+                    <td>19</td>
+                    <td>21</td>
+                    <td>2</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/17.jpg" alt="17"></td>
+                    <td>5614</td>
+                    <td>5663</td>
+                    <td>49</td>
+                    <td>20</td>
+                    <td>781</td>
+                    <td>795</td>
+                    <td>14</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/30.jpg" alt="30"></td>
+                    <td></td>
+                    <td></td>
+                    <td>0</td>
+                    <td>13</td>
+                    <td></td>
+                    <td></td>
+                    <td>0</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/31.jpg" alt="31"></td>
+                    <td></td>
+                    <td></td>
+                    <td>0</td>
+                    <td>6</td>
+                    <td></td>
+                    <td></td>
+                    <td>0</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/29.jpg" alt="29"></td>
+                    <td></td>
+                    <td></td>
+                    <td>0</td>
+                    <td>9</td>
+                    <td></td>
+                    <td></td>
+                    <td>0</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/18.jpg" alt="18"></td>
+                    <td>15865</td>
+                    <td>15924</td>
+                    <td>59</td>
+                    <td>59</td>
+                    <td>2089</td>
+                    <td>2092</td>
+                    <td>3</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/20.jpg" alt="20"></td>
+                    <td>10864</td>
+                    <td>10883</td>
+                    <td>19</td>
+                    <td>19</td>
+                    <td>5976</td>
+                    <td>5978</td>
+                    <td>2</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><img src="imagenes/28.jpg" alt="28"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>0</td>
+                    <td>-</td>
+                </tr>
+                <tr class="total-row">
+                    <td>Totales</td>
+                    <td></td>
+                    <td></td>
+                    <td>412</td>
+                    <td>312</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr class="monto-row">
+                    <td>Monto (Gs)</td>
+                    <td></td>
+                    <td></td>
+                    <td>3.433.333</td>
+                    <td>2.600.000</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
