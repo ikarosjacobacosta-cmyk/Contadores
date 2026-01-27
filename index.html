@@ -1,873 +1,348 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informe de Contadores</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-        h2 {
-            color: #444;
-            border-bottom: 2px solid #ddd;
-            padding-bottom: 5px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 30px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
-        }
-        th {
-            background-color: #f2f2f2;
-            font-weight: bold;
-        }
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        .total-row {
-            background-color: #e6f7ff;
-            font-weight: bold;
-        }
-        .monto-row {
-            background-color: #fff2cc;
-        }
-        img {
-            width: 5cm;
-            height: 5cm;
-            object-fit: contain;
-        }
-        .section {
-            margin-bottom: 40px;
-        }
-    </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Catálogo de Máquinas</title>
+<style>
+:root { color-scheme: light; }
+* { box-sizing: border-box; }
+html, body { margin:0; padding:0; background:#fff !important; font-family: Inter, Arial, sans-serif; color:#222; }
+.container { max-width:1200px; margin:0 auto; padding:20px; }
+header { text-align:center; margin-bottom:10px; }
+h1 { margin:10px 0 20px; font-size:1.8rem; }
+
+/* Barra de búsqueda flotante */
+.floating-search-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  z-index: 1000;
+  padding: 15px 0;
+  transition: all 0.3s ease;
+}
+
+.floating-search-container .busqueda-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.floating-search-container #busqueda {
+  width: 90%;
+  max-width: 480px;
+  padding: 10px 12px;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+.galeria { 
+  display:grid; 
+  gap:12px; 
+  justify-items:center;
+  margin-top: 20px;
+}
+
+.imagen-item { 
+  display:flex; 
+  flex-direction:column; 
+  align-items:center; 
+  padding:8px; 
+  background:#fff; 
+  border-radius:8px; 
+  box-shadow:0 1px 3px rgba(0,0,0,0.06); 
+}
+
+.imagen-item img { 
+  width:5cm; 
+  height:5cm; 
+  object-fit:contain; 
+  background:#fff; 
+  border:1px solid #e0e0e0; 
+  border-radius:6px; 
+}
+
+.imagen-item p { 
+  margin-top:8px; 
+  font-size:0.95rem; 
+  color:#333; 
+  font-weight: 500;
+}
+
+footer { 
+  text-align:center; 
+  padding:14px; 
+  margin-top:20px; 
+  color:#666; 
+  font-size:0.9rem; 
+}
+
+/* Ajuste del padding superior para la barra flotante */
+body {
+  padding-top: 80px;
+}
+
+/* Responsive grid: 5 cols desktop, 4 tablet, 3 mobile */
+/* Desktop: try to fit 5 columns of 5cm each if space allows */
+@media (min-width: 1200px) {
+  .galeria { grid-template-columns: repeat(5, 1fr); }
+  .imagen-item img { width:5cm; height:5cm; }
+}
+
+/* Large laptops */
+@media (min-width: 901px) and (max-width:1199px) {
+  .galeria { grid-template-columns: repeat(4, 1fr); }
+  .imagen-item img { width:calc(100% - 24px); height:auto; aspect-ratio:1/1; }
+}
+
+/* Tablet */
+@media (min-width: 601px) and (max-width:900px) {
+  .galeria { grid-template-columns: repeat(4, 1fr); }
+  .imagen-item img { width:100%; height:auto; aspect-ratio:1/1; }
+}
+
+/* Mobile: 3 columns */
+@media (max-width:600px) {
+  .galeria { grid-template-columns: repeat(3, 1fr); }
+  .imagen-item img { width:100%; height:auto; aspect-ratio:1/1; }
+  
+  /* Ajuste de padding para móviles */
+  body {
+    padding-top: 70px;
+  }
+  
+  .floating-search-container {
+    padding: 10px 0;
+  }
+}
+
+/* Make images responsive inside grid cells */
+@media (min-width:1200px) {
+  .galeria { grid-auto-rows: auto; }
+}
+</style>
 </head>
 <body>
-    <h1>Informe de Contadores</h1>
-    
-    <!-- Sección Los Laureles -->
-    <div class="section">
-        <h2>Los Laureles</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Nro</th>
-                    <th>Inicio</th>
-                    <th>Fin</th>
-                    <th>Diferencia</th>
-                    <th>Fichas retiradas</th>
-                    <th>Inicio</th>
-                    <th>Fin</th>
-                    <th>Diferencia</th>
-                    <th>Salida de Stock</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><img src="imagenes/14.jpg" alt="14"></td>
-                    <td>15512</td>
-                    <td>15523</td>
-                    <td>11</td>
-                    <td>11</td>
-                    <td>1860</td>
-                    <td>1861</td>
-                    <td>1</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/05.jpg" alt="05"></td>
-                    <td>14910</td>
-                    <td>14943</td>
-                    <td>33</td>
-                    <td>33</td>
-                    <td>485</td>
-                    <td>488</td>
-                    <td>3</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/13.jpg" alt="13"></td>
-                    <td>17654</td>
-                    <td>17758</td>
-                    <td>104</td>
-                    <td>104</td>
-                    <td>1588</td>
-                    <td>1596</td>
-                    <td>8</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/03.jpg" alt="03"></td>
-                    <td>30337</td>
-                    <td>30372</td>
-                    <td>35</td>
-                    <td>35</td>
-                    <td>650</td>
-                    <td>651</td>
-                    <td>1</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/02.jpg" alt="02"></td>
-                    <td>4519</td>
-                    <td>4563</td>
-                    <td>44</td>
-                    <td>44</td>
-                    <td>266</td>
-                    <td>269</td>
-                    <td>3</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/06.jpg" alt="06"></td>
-                    <td>904</td>
-                    <td>931</td>
-                    <td>27</td>
-                    <td>25</td>
-                    <td>66</td>
-                    <td>69</td>
-                    <td>3</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/08.jpg" alt="08"></td>
-                    <td>46157</td>
-                    <td>46192</td>
-                    <td>35</td>
-                    <td>36</td>
-                    <td>24576</td>
-                    <td>24736</td>
-                    <td>160</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/09.jpg" alt="09"></td>
-                    <td>151511</td>
-                    <td>151568</td>
-                    <td>57</td>
-                    <td>57</td>
-                    <td>4211</td>
-                    <td>4727</td>
-                    <td>516</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/10.jpg" alt="10"></td>
-                    <td>80945</td>
-                    <td>80984</td>
-                    <td>39</td>
-                    <td>1</td>
-                    <td>306195</td>
-                    <td>306381</td>
-                    <td>186</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/11.jpg" alt="11"></td>
-                    <td>117363</td>
-                    <td>117387</td>
-                    <td>24</td>
-                    <td>26</td>
-                    <td>44403</td>
-                    <td>44544</td>
-                    <td>141</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/12.jpg" alt="12"></td>
-                    <td>31858</td>
-                    <td>31897</td>
-                    <td>39</td>
-                    <td>40</td>
-                    <td>41621</td>
-                    <td>42769</td>
-                    <td>1148</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/04.jpg" alt="04"></td>
-                    <td></td>
-                    <td></td>
-                    <td>0</td>
-                    <td>14</td>
-                    <td></td>
-                    <td></td>
-                    <td>0</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/07.jpg" alt="07"></td>
-                    <td></td>
-                    <td></td>
-                    <td>0</td>
-                    <td>14</td>
-                    <td></td>
-                    <td></td>
-                    <td>0</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/01.jpg" alt="01"></td>
-                    <td></td>
-                    <td>42569</td>
-                    <td></td>
-                    <td>138</td>
-                    <td>8025</td>
-                    <td></td>
-                    <td></td>
-                    <td>-</td>
-                </tr>
-                <tr class="total-row">
-                    <td>Totales</td>
-                    <td></td>
-                    <td></td>
-                    <td>476</td>
-                    <td>578</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>-</td>
-                </tr>
-                <tr class="monto-row">
-                    <td>Monto (Gs)</td>
-                    <td></td>
-                    <td></td>
-                    <td>3.966.667</td>
-                    <td>4.816.667</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
+  <!-- Barra de búsqueda flotante -->
+  <div class="floating-search-container">
+    <div class="busqueda-container">
+      <input type="text" id="busqueda" placeholder="Buscar por código (MAQ01, MAQ02, ...)" aria-label="Buscar">
+    </div>
+  </div>
+
+  <div class="container">
+    <header>
+      <h1>Catálogo de Máquinas</h1>
+    </header>
+
+    <!-- Galería única con todas las máquinas -->
+    <div class="galeria">
+      <!-- MAQ01 al MAQ44 -->
+      <div class="imagen-item" data-code="MAQ01">
+        <img src="imagenes/MAQ01.jpg" alt="MAQ01">
+        <p>MAQ01</p>
+      </div>
+      <div class="imagen-item" data-code="MAQ02">
+        <img src="imagenes/MAQ02.jpg" alt="MAQ02">
+        <p>MAQ02</p>
+      </div>
+      <div class="imagen-item" data-code="MAQ03">
+        <img src="imagenes/MAQ03.jpg" alt="MAQ03">
+        <p>MAQ03</p>
+      </div>
+      <div class="imagen-item" data-code="MAQ04">
+        <img src="imagenes/MAQ04.jpg" alt="MAQ04">
+        <p>MAQ04</p>
+      </div>
+      <div class="imagen-item" data-code="MAQ05">
+        <img src="imagenes/MAQ05.jpg" alt="MAQ05">
+        <p>MAQ05</p>
+      </div>
+      <div class="imagen-item" data-code="MAQ06">
+        <img src="imagenes/MAQ06.jpg" alt="MAQ06">
+        <p>MAQ06</p>
+      </div>
+      <div class="imagen-item" data-code="MAQ07">
+        <img src="imagenes/MAQ07.jpg" alt="MAQ07">
+        <p>MAQ07</p>
+      </div>
+      <div class="imagen-item" data-code="MAQ08">
+        <img src="imagenes/MAQ08.jpg" alt="MAQ08">
+        <p>MAQ08</p>
+      </div>
+      <div class="imagen-item" data-code="MAQ09">
+        <img src="imagenes/MAQ09.jpg" alt="MAQ09">
+        <p>MAQ09</p>
+      </div>
+      <div class="imagen-item" data-code="MAQ10">
+        <img src="imagenes/MAQ10.jpg" alt="MAQ10">
+        <p>MAQ10</p>
+      </div>
+      <div class="imagen-item" data-code="MAQ11">
+        <img src="imagenes/MAQ11.jpg" alt="MAQ11">
+        <p>MAQ11</p>
+      </div>
+      <div class="imagen-item" data-code="MAQ12">
+        <img src="imagenes/MAQ12.jpg" alt="MAQ12">
+        <p>MAQ12</p>
+      </div>
+      <div class="imagen-item" data-code="MAQ13">
+        <img src="imagenes/MAQ13.jpg" alt="MAQ13">
+        <p>MAQ13</p>
+      </div>
+      <div class="imagen-item" data-code="MAQ14">
+        <img src="imagenes/MAQ14.jpg" alt="MAQ14">
+        <p>MAQ14</p>
+      </div>
+      <div class="imagen-item" data-code="MAQ15">
+        <img src="imagenes/MAQ15.jpg" alt="MAQ15">
+        <p>MAQ15</p>
+      </div>
+      <div class="imagen-item" data-code="MAQ16">
+        <img src="imagenes/MAQ16.jpg" alt="MAQ16">
+        <p>MAQ16</p>
+      </div>
+      <div class="imagen-item" data-code="MAQ17">
+        <img src="imagenes/MAQ17.jpg" alt="MAQ17">
+        <p>MAQ17</p>
+      </div>
+      <div class="imagen-item" data-code="MAQ18">
+        <img src="imagenes/MAQ18.jpg" alt="MAQ18">
+        <p>MAQ18</p>
+      </div>
+      <div class="imagen-item" data-code="MAQ19">
+        <img src="imagenes/MAQ19.jpg" alt="MAQ19">
+        <p>MAQ19</p>
+      </div>
+      <div class="imagen-item" data-code="MAQ20">
+        <img src="imagenes/MAQ20.jpg" alt="MAQ20">
+        <p>MAQ20</p>
+      </div>
+      <div class="imagen-item" data-code="MAQ21">
+        <img src="imagenes/MAQ21.jpg" alt="MAQ21">
+        <p>MAQ21</p>
+      </div>
+      <div class="imagen-item" data-code="MAQ22">
+        <img src="imagenes/MAQ22.jpg" alt="MAQ22">
+        <p>MAQ22</p>
+      </div>
+      <div class="imagen-item" data-code="MAQ23">
+        <img src="imagenes/MAQ23.jpg" alt="MAQ23">
+        <p>MAQ23</p>
+      </div>
+      <div class="imagen-item" data-code="MAQ24">
+        <img src="imagenes/MAQ24.jpg" alt="MAQ24">
+        <p>MAQ24</p>
+      </div>
+      <div class="imagen-item" data-code="MAQ25">
+        <img src="imagenes/MAQ25.jpg" alt="MAQ25">
+        <p>MAQ25</p>
+      </div>
+      <div class="imagen-item" data-code="MAQ26">
+        <img src="imagenes/MAQ26.jpg" alt="MAQ26">
+        <p>MAQ26</p>
+      </div>
+      <div class="imagen-item" data-code="MAQ27">
+        <img src="imagenes/MAQ27.jpg" alt="MAQ27">
+        <p>MAQ27</p>
+      </div>
+      <div class="imagen-item" data-code="MAQ28">
+        <img src="imagenes/MAQ28.jpg" alt="MAQ28">
+        <p>MAQ28</p>
+      </div>
+      <div class="imagen-item" data-code="MAQ29">
+        <img src="imagenes/MAQ29.jpg" alt="MAQ29">
+        <p>MAQ29</p>
+      </div>
+      <div class="imagen-item" data-code="MAQ30">
+        <img src="imagenes/MAQ30.jpg" alt="MAQ30">
+        <p>MAQ30</p>
+      </div>
+      <div class="imagen-item" data-code="MAQ31">
+        <img src="imagenes/MAQ31.jpg" alt="MAQ31">
+        <p>MAQ31</p>
+      </div>
+      <div class="imagen-item" data-code="MAQ32">
+        <img src="imagenes/MAQ32.jpg" alt="MAQ32">
+        <p>MAQ32</p>
+      </div>
+      <div class="imagen-item" data-code="MAQ33">
+        <img src="imagenes/MAQ33.jpg" alt="MAQ33">
+        <p>MAQ33</p>
+      </div>
+      <div class="imagen-item" data-code="MAQ34">
+        <img src="imagenes/MAQ34.jpg" alt="MAQ34">
+        <p>MAQ34</p>
+      </div>
+      <div class="imagen-item" data-code="MAQ35">
+        <img src="imagenes/MAQ35.jpg" alt="MAQ35">
+        <p>MAQ35</p>
+      </div>
+      <div class="imagen-item" data-code="MAQ36">
+        <img src="imagenes/MAQ36.jpg" alt="MAQ36">
+        <p>MAQ36</p>
+      </div>
+      <div class="imagen-item" data-code="MAQ37">
+        <img src="imagenes/MAQ37.jpg" alt="MAQ37">
+        <p>MAQ37</p>
+      </div>
+      <div class="imagen-item" data-code="MAQ38">
+        <img src="imagenes/MAQ38.jpg" alt="MAQ38">
+        <p>MAQ38</p>
+      </div>
+      <div class="imagen-item" data-code="MAQ39">
+        <img src="imagenes/MAQ39.jpg" alt="MAQ39">
+        <p>MAQ39</p>
+      </div>
+      <div class="imagen-item" data-code="MAQ40">
+        <img src="imagenes/MAQ40.jpg" alt="MAQ40">
+        <p>MAQ40</p>
+      </div>
+      <div class="imagen-item" data-code="MAQ41">
+        <img src="imagenes/MAQ41.jpg" alt="MAQ41">
+        <p>MAQ41</p>
+      </div>
+      <div class="imagen-item" data-code="MAQ42">
+        <img src="imagenes/MAQ42.jpg" alt="MAQ42">
+        <p>MAQ42</p>
+      </div>
+      <div class="imagen-item" data-code="MAQ43">
+        <img src="imagenes/MAQ43.jpg" alt="MAQ43">
+        <p>MAQ43</p>
+      </div>
+      <div class="imagen-item" data-code="MAQ44">
+        <img src="imagenes/MAQ44.jpg" alt="MAQ44">
+        <p>MAQ44</p>
+      </div>
     </div>
     
-    <!-- Sección Villa Morra -->
-    <div class="section">
-        <h2>Villa Morra</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Nro</th>
-                    <th>Inicio</th>
-                    <th>Fin</th>
-                    <th>Diferencia</th>
-                    <th>Fichas retiradas</th>
-                    <th>Inicio</th>
-                    <th>Fin</th>
-                    <th>Diferencia</th>
-                    <th>Salida de Stock</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><img src="imagenes/38.jpg" alt="38"></td>
-                    <td>28188</td>
-                    <td>28209</td>
-                    <td>21</td>
-                    <td>22</td>
-                    <td></td>
-                    <td></td>
-                    <td>0</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/39.jpg" alt="39"></td>
-                    <td>788</td>
-                    <td>836</td>
-                    <td>48</td>
-                    <td>42</td>
-                    <td>79</td>
-                    <td>83</td>
-                    <td>4</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/40.jpg" alt="40"></td>
-                    <td>28511</td>
-                    <td>28600</td>
-                    <td>89</td>
-                    <td>89</td>
-                    <td>2081</td>
-                    <td>2087</td>
-                    <td>6</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/41.jpg" alt="41"></td>
-                    <td>27428</td>
-                    <td>27464</td>
-                    <td>36</td>
-                    <td>36</td>
-                    <td>2163</td>
-                    <td>2171</td>
-                    <td>8</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/42.jpg" alt="42"></td>
-                    <td>499</td>
-                    <td>571</td>
-                    <td>72</td>
-                    <td>65</td>
-                    <td>36</td>
-                    <td>40</td>
-                    <td>4</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/43.jpg" alt="43"></td>
-                    <td>19054</td>
-                    <td>19079</td>
-                    <td>25</td>
-                    <td>0</td>
-                    <td>1673</td>
-                    <td>1674</td>
-                    <td>1</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/44.jpg" alt="44"></td>
-                    <td>20594</td>
-                    <td>20616</td>
-                    <td>22</td>
-                    <td>47</td>
-                    <td>1425</td>
-                    <td>1428</td>
-                    <td>3</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/36.jpg" alt="36"></td>
-                    <td></td>
-                    <td></td>
-                    <td>0</td>
-                    <td>31</td>
-                    <td>13205</td>
-                    <td>13360</td>
-                    <td>155</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/37.jpg" alt="37"></td>
-                    <td>104301</td>
-                    <td>104336</td>
-                    <td>35</td>
-                    <td>683</td>
-                    <td>663644</td>
-                    <td>663794</td>
-                    <td>150</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/35.jpg" alt="35"></td>
-                    <td>40090</td>
-                    <td>40148</td>
-                    <td>58</td>
-                    <td>56</td>
-                    <td>22867</td>
-                    <td>23402</td>
-                    <td>535</td>
-                    <td>-</td>
-                </tr>
-                <tr class="total-row">
-                    <td>Totales</td>
-                    <td></td>
-                    <td></td>
-                    <td>406</td>
-                    <td>1071</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr class="monto-row">
-                    <td>Monto (Gs)</td>
-                    <td></td>
-                    <td></td>
-                    <td>3.383.333</td>
-                    <td>8.925.000</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    
-    <!-- Sección Lambaré -->
-    <div class="section">
-        <h2>Lambaré</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Nro</th>
-                    <th>Inicio</th>
-                    <th>Fin</th>
-                    <th>Diferencia</th>
-                    <th>Fichas retiradas</th>
-                    <th>Inicio</th>
-                    <th>Fin</th>
-                    <th>Diferencia</th>
-                    <th>Salida de Stock</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><img src="imagenes/49.jpg" alt="49"></td>
-                    <td>182</td>
-                    <td>221</td>
-                    <td>39</td>
-                    <td>44</td>
-                    <td>33</td>
-                    <td>41</td>
-                    <td>8</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/50.jpg" alt="50"></td>
-                    <td>30</td>
-                    <td>35</td>
-                    <td>5</td>
-                    <td>0</td>
-                    <td>7</td>
-                    <td>8</td>
-                    <td>1</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/53.jpg" alt="53"></td>
-                    <td>171</td>
-                    <td>171</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>28</td>
-                    <td>28</td>
-                    <td>0</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/51.jpg" alt="51"></td>
-                    <td>1521</td>
-                    <td>1576</td>
-                    <td>55</td>
-                    <td>54</td>
-                    <td>108</td>
-                    <td>112</td>
-                    <td>4</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/45.jpg" alt="45"></td>
-                    <td>6880</td>
-                    <td>6932</td>
-                    <td>52</td>
-                    <td>65</td>
-                    <td>601</td>
-                    <td>607</td>
-                    <td>6</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/46.jpg" alt="46"></td>
-                    <td>181</td>
-                    <td>247</td>
-                    <td>66</td>
-                    <td>65</td>
-                    <td>18</td>
-                    <td>24</td>
-                    <td>6</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/58.jpg" alt="58"></td>
-                    <td>10272</td>
-                    <td>10322</td>
-                    <td>50</td>
-                    <td>53</td>
-                    <td>36515</td>
-                    <td>36852</td>
-                    <td>337</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/52.jpg" alt="52"></td>
-                    <td></td>
-                    <td></td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td></td>
-                    <td></td>
-                    <td>0</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/54.jpg" alt="54"></td>
-                    <td></td>
-                    <td></td>
-                    <td>0</td>
-                    <td>14</td>
-                    <td></td>
-                    <td></td>
-                    <td>0</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/55.jpg" alt="55"></td>
-                    <td></td>
-                    <td></td>
-                    <td>0</td>
-                    <td>8</td>
-                    <td></td>
-                    <td></td>
-                    <td>0</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/56.jpg" alt="56"></td>
-                    <td></td>
-                    <td></td>
-                    <td>0</td>
-                    <td>15</td>
-                    <td></td>
-                    <td></td>
-                    <td>0</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/48.jpg" alt="48"></td>
-                    <td></td>
-                    <td></td>
-                    <td>0</td>
-                    <td>19</td>
-                    <td></td>
-                    <td></td>
-                    <td>0</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/57.jpg" alt="57"></td>
-                    <td></td>
-                    <td></td>
-                    <td>0</td>
-                    <td>24</td>
-                    <td></td>
-                    <td></td>
-                    <td>0</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/47.jpg" alt="47"></td>
-                    <td>16431</td>
-                    <td>16470</td>
-                    <td>39</td>
-                    <td>35</td>
-                    <td>302436</td>
-                    <td>302899</td>
-                    <td>463</td>
-                    <td>-</td>
-                </tr>
-                <tr class="total-row">
-                    <td>Totales</td>
-                    <td></td>
-                    <td></td>
-                    <td>386</td>
-                    <td>396</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr class="monto-row">
-                    <td>Monto (Gs)</td>
-                    <td></td>
-                    <td></td>
-                    <td>3.216.667</td>
-                    <td>3.300.000</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    
-    <!-- Sección Villa Elisa -->
-    <div class="section">
-        <h2>Villa Elisa</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Nro</th>
-                    <th>Inicio</th>
-                    <th>Fin</th>
-                    <th>Diferencia</th>
-                    <th>Fichas retiradas</th>
-                    <th>Inicio</th>
-                    <th>Fin</th>
-                    <th>Diferencia</th>
-                    <th>Salida de Stock</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><img src="imagenes/22.jpg" alt="22"></td>
-                    <td>99235</td>
-                    <td>99285</td>
-                    <td>50</td>
-                    <td>51</td>
-                    <td>619507</td>
-                    <td>620085</td>
-                    <td>578</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/23.jpg" alt="23"></td>
-                    <td>30979</td>
-                    <td>31000</td>
-                    <td>21</td>
-                    <td>21</td>
-                    <td>1745</td>
-                    <td>1897</td>
-                    <td>152</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/24.jpg" alt="24"></td>
-                    <td>63399</td>
-                    <td>63430</td>
-                    <td>31</td>
-                    <td>31</td>
-                    <td>240103</td>
-                    <td>240191</td>
-                    <td>88</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/33.jpg" alt="33"></td>
-                    <td>16684</td>
-                    <td>16695</td>
-                    <td>11</td>
-                    <td>347</td>
-                    <td>2741</td>
-                    <td>2901</td>
-                    <td>160</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/25.jpg" alt="25"></td>
-                    <td>95356</td>
-                    <td>95366</td>
-                    <td>10</td>
-                    <td>291</td>
-                    <td>961728</td>
-                    <td>961739</td>
-                    <td>11</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/32.jpg" alt="32"></td>
-                    <td></td>
-                    <td></td>
-                    <td>0</td>
-                    <td>12</td>
-                    <td></td>
-                    <td></td>
-                    <td>0</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/26.jpg" alt="26"></td>
-                    <td>13612</td>
-                    <td>13612</td>
-                    <td>0</td>
-                    <td>13</td>
-                    <td></td>
-                    <td></td>
-                    <td>0</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/27.jpg" alt="27"></td>
-                    <td>70406</td>
-                    <td>70427</td>
-                    <td>21</td>
-                    <td>20</td>
-                    <td></td>
-                    <td></td>
-                    <td>0</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/34.jpg" alt="34"></td>
-                    <td>5969</td>
-                    <td>5978</td>
-                    <td>9</td>
-                    <td>0</td>
-                    <td></td>
-                    <td></td>
-                    <td>0</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/15.jpg" alt="15"></td>
-                    <td>5843</td>
-                    <td>5856</td>
-                    <td>13</td>
-                    <td>184</td>
-                    <td>718</td>
-                    <td>719</td>
-                    <td>1</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/16.jpg" alt="16"></td>
-                    <td>10173</td>
-                    <td>10173</td>
-                    <td>0</td>
-                    <td>194</td>
-                    <td>1353</td>
-                    <td>1353</td>
-                    <td>0</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/19.jpg" alt="19"></td>
-                    <td>316</td>
-                    <td>391</td>
-                    <td>75</td>
-                    <td>75</td>
-                    <td>31</td>
-                    <td>38</td>
-                    <td>7</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/21.jpg" alt="21"></td>
-                    <td></td>
-                    <td>247</td>
-                    <td>247</td>
-                    <td>124</td>
-                    <td></td>
-                    <td>19</td>
-                    <td>19</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/17.jpg" alt="17"></td>
-                    <td>5586</td>
-                    <td>5614</td>
-                    <td>28</td>
-                    <td>175</td>
-                    <td>778</td>
-                    <td>781</td>
-                    <td>3</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/30.jpg" alt="30"></td>
-                    <td></td>
-                    <td></td>
-                    <td>0</td>
-                    <td>14</td>
-                    <td></td>
-                    <td></td>
-                    <td>0</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/31.jpg" alt="31"></td>
-                    <td></td>
-                    <td></td>
-                    <td>0</td>
-                    <td>7</td>
-                    <td></td>
-                    <td></td>
-                    <td>0</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/29.jpg" alt="29"></td>
-                    <td></td>
-                    <td></td>
-                    <td>0</td>
-                    <td>148</td>
-                    <td></td>
-                    <td></td>
-                    <td>0</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/18.jpg" alt="18"></td>
-                    <td>15797</td>
-                    <td>15865</td>
-                    <td>68</td>
-                    <td>68</td>
-                    <td>2087</td>
-                    <td>2089</td>
-                    <td>2</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/20.jpg" alt="20"></td>
-                    <td>10844</td>
-                    <td>10864</td>
-                    <td>20</td>
-                    <td>21</td>
-                    <td>5974</td>
-                    <td>5976</td>
-                    <td>2</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><img src="imagenes/28.jpg" alt="28"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>0</td>
-                    <td></td>
-                    <td></td>
-                    <td>0</td>
-                    <td>-</td>
-                </tr>
-                <tr class="total-row">
-                    <td>Totales</td>
-                    <td></td>
-                    <td></td>
-                    <td>798</td>
-                    <td>1796</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr class="monto-row">
-                    <td>Monto (Gs)</td>
-                    <td></td>
-                    <td></td>
-                    <td>6.650.000</td>
-                    <td>14.966.667</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+  </div> <!-- container -->
+  <footer>
+    <p>© 2025 Catálogo de Máquinas</p>
+  </footer>
+
+<script>
+// Buscador que filtra solo por código
+document.getElementById('busqueda').addEventListener('input', function() {
+  const q = this.value.trim().toLowerCase();
+  const items = document.querySelectorAll('.imagen-item');
+
+  items.forEach(item => {
+    const code = (item.getAttribute('data-code') || '').toLowerCase();
+
+    if (q === '' || code.includes(q)) {
+      item.style.display = 'flex';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+});
+</script>
+
 </body>
 </html>
